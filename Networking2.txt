@@ -1,0 +1,115 @@
+Layer 4 | TRANSPORT | TCP/UDP
+    TCP
+        4-way teardown process
+        3-way handshake to initiate
+    UDP headers are shorter - source port, destination port, length, chcksum
+
+Layer 5 | SESSION 
+    Example: VPN
+        Remote Access (client to site)
+        Site-to-Site
+    L2TP - Layer 2 Tunneling Protocol (UDP 1723)
+        No encryption, just a tunneling Protocol
+    PPTP
+        Microsoft
+        Provides encryption
+        Obsolete, many vulns
+    L2F
+        Cisco
+        Tunnel only, no encryption
+        requires L2F Network server and L2F Access Concentrator
+    IPSEC
+        Modes: Transport or Tunnel
+        Transport - payload is encrypted e2e
+        Tunnel - payload only encrypted between the 2 nodes (routers)
+        headers
+            ESP (proto 50)
+            AH (proto 51)
+            IKE (UDP port 500 or 4500)
+    Proxies
+        Forward, Reverse, Transparent, Annon
+    SOCKS 4/5
+        Socket Secure
+        Client/server exchange messages
+            Client can provide auth to server (SOCKS 5+)
+            Client can request connections from the server
+            SOCKS 4 only IPv4, no UDP - no proxy binding
+    NetBIOS
+        Early 1980s
+    SMB
+        File sharing - rides on NetBIOS
+        SAMBA and CIFS are just flavors of SMB - SAMBA: Linux, CIFS: Windows to Linux
+    RPC = distributed computing && Remote RECON
+    API
+
+Layer 6 | PRESENTATION | What is shown to the User
+    translation
+    Formating
+    Encoding (ASCII, EBCDIC, HEX, BASE64)
+    Encryption
+    Compression
+
+Layer 7 | APPLICATION | User programs and protocols
+    TELNET (23)
+    SSH (22)
+    HTTP/HTTPS (80/443)
+    DNS (53) - TCP (zone transfer/DNS security, larger than 512 bytes) UDP (general)
+    FTP (TCP 20/21) 21: control | 20: opens only during data transfer
+        Auth or anonymous
+        Clear text, 2 modes: active/passive
+            NAT/Firewall traversal issues with active
+            Complications tunneling through SSH
+            Passive: side steps - client initiates ports rather than the server
+    TFTP (UDP 69) - sometimes used in routers
+        Can compromise network by intercepting configs in transit
+    SMTP (TCP 25)
+        send email
+        unencrypted
+        SMTPS over TLS/SSL (TCP 587/465)
+    POP (TCP 110)
+        receives email
+        No server sync - deleted when downloaded
+        no encryption
+    IMAP (TCP 143)
+        More mail - syncronous no encryption
+    DHCP (UDP 67/68)
+        DORA
+        SLAAC
+            Solicit
+            Advertise
+            Request or information request
+            Reply
+        Vulns: Rogue DHCP, Evil twin, DHCP Starvation
+    NTP (UDP 123)
+        Uses stratum levels - 0 (authoritative) to 15
+        Vulns: crafted packet injection
+    AAA protocols
+        TACAS
+        RADIUS
+        DIAMETER
+    SNMP (UDP 161/162)
+        Simple network management protocol 
+        V3 is encrypted and should be used
+        7 message types - Get request, set request, get next, get bulk, response, trap, inform 
+    RTP (UDP any above 1023)
+        Real time protocol - voice and streaming
+    RDP (TCP 3389)
+        GUI based, allows remote access to a machine
+        No server software needed
+        Cleartext
+    KERBEROS (UDP 88)
+        Used for authentication
+        Associated with Active Directory
+    LDAP(S) (TCP 389 AND 636)
+        Manage systems, typically over a domain
+
+FTP DEMO
+    option: wget -r ftp://<ip> - only uses anonymous login
+    ftp <ip>
+    username: <anonymous>
+    password: hahano
+    ftp <ip>
+    username: <student>
+    password: <password>
+    get <filename.extension>
+    

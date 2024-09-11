@@ -1,0 +1,16 @@
+User space sockets don't need elevated permissions
+Promicious Mode - Listen on all NICs for your traffic plus others
+TCPDump Options
+    -i specify interface
+    -X or XX print payload in HEX and ASCII
+    -v -vv -vvv increasing verbosity
+    -w write pcap
+    -r read pcap
+    -n no inverse lookups
+    -d dump the compiled packet matching code in a human readable form 
+can use hex or decimal in syntax, but don't mix
+
+sudo tcpdump -r /home/activity_resources/BPFCheck.pcap "tcp[13]=2" -nvvvXX
+use | wc -l to get your wordcount to check results
+convert IP to hex to use with TCPDump 
+null tcp scan "tcp[13]=0"
