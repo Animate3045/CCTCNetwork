@@ -1,0 +1,87 @@
+nano <filename>.py
+copy in the following
+    #!/usr/bin/python3
+    import socket
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
+    ip_addr = '127.0.0.1'
+    port = 1111
+    s.connect((ip_addr, port))
+    message = b"Message"
+    s.send(message)
+    data, conn = s.recvfrom(1024)
+    print(data.decode('utf-8')) #utf 8 widely used on the internet
+    s.close()
+    save it out
+    chmod +x <filename>
+
+netcat -lvp 1111
+
+RFC 791 - specification for IPv4 header construction
+RAW Socket scripts must include the IP header and the next headers
+    IPv4 --> TCP etc 
+
+echo "hexencode" | xxd #encode to hex 
+
+xxd -r <DecodeFile> <decodedFile>
+
+in python - 
+
+ip tos 40
+
+TCP header
+source port - random high port
+destination port match to service
+sequence - any
+ack - any 
+
+Stream Socket Message Sender
+Gorgan Forces have requested you get a message to one of their remote teams that are utilizing the BLUE_DMZ_HOST-1. Utilizing the criteria they provided, generate a stream socket with python3:
+
+Coded information was placed into the video below. Look at the note the woman passes to the man.
+
+https://youtu.be/6WTdTwcmxyo?t=35
+
+    From your INTERNET-HOST to the BLUE_DMZ_HOST-1
+    Port number = #Last four digits on the note
+
+    Message = #Name on the note (First letter capitalized)
+
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+ipaddr = '172.16.1.15'
+port = 5309
+
+# To send a string as a bytes-like object, add the prefix b to the string. \n is used to go to the next line (hit enter)
+s.sendto(b'Jenny', (ipaddr,port))
+
+# It is recommended that the buffersize used with recvfrom is a power of 2 and not a very large number of bits
+response, conn = s.recvfrom(1024)
+
+# In order to receive a message that is sent as a bytes-like-object you must decode into utf-8 (default)
+print(response.decode())
+
+
+
+Gorgan Forces have requested you get a message to one of their remote teams that are utilizing the INTERNET_HOST. Utilizing the criteria they provided, generate a datagram socket with python3:
+
+Coded information was placed into the video below. Listen to the words in the video.
+
+https://youtu.be/OuK4OcMUGcg?t=67
+
+    Send to your INTERNET-HOST localhost. 127.0.0.1
+
+    Port number = #The number of fists 10000
+
+    Message = #The name of the band (First letter capitalized) Disturbed
+
+#!/usr/bin/python3
+import socket
+s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, 0)
+ip_addr = '127.0.0.1'
+port = 10000
+message = b"Disturbed"
+s.sendto(message, (ip_addr, port))
+data, addr = s.recvfrom(1024)
+print(data.decode())
