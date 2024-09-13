@@ -1,0 +1,115 @@
+Recon Stages
+    External
+        Passive - non-interactive reconnaissance from outside the network (wireshark/packet sniffing)
+            Sites
+                - OSINT framework
+                - Pentest-Standard
+                - SecuritySift
+            OSINT
+            PAI
+            IP Addresses amd Subdomains
+                IANA IPv4
+                IANA IPv6
+                DNS Lookups - arin.net, whois.domaintools.com, viewdns.info, dnsdumpster,com, centralops.net
+                URL Scans
+                IP Geolocation
+                BGP Lookup
+            External/3rd party sites
+                Parent/Subordinate Orgs
+                Clients/Customers
+                Service organizations
+                Partners
+            People
+                Target website
+                Crawler tools
+                Search engines
+                Social Media
+                Job Portals
+                Tracting active emails
+                Family Tree
+            Technologies
+                File Extensions
+                Server responses
+                Job listing
+                Website content
+                Google Hacking
+                Shodan.io
+                MAC OUI lookup
+            Content of interest
+                /etc/passwd and /etc/shadow or SAM database
+                Config files
+                Log files
+                Backup files
+                test pages
+                Client-side code
+            Vulnerabilities
+                Known technologies
+                Error messages responses
+                ID running services
+                Identify running OS
+                Monitor running applications
+        Active - interactive reconnaissance from outside the network (scans)
+            Remote-to-local
+            local-to-remote
+            local-to-local
+            remote-to-remote
+            1-to-1
+            1-to-many
+            many-to-one
+            many-to-many
+            Vertical Scan - scan some/all ports on a single target
+            Horizontal Scan - scan single/set of port(s) on a range of targets
+            Strobe scan - scan a predefinted subset of ports on a range of targets
+            block scan - scan all/range ports on a range of targets
+            Distributed Scan - Block
+            Distributed Scan - Strobe
+            ping single ip or range - range scan: for i in {1..254}; do (ping -c 1 172.16.82.$i | grep "bytes from" &) ; done
+            nmap port scan - determine closed by getting back a reset flag
+            firewalking - seeing what ports get through the firewall
+            netcat horizontal scanning
+                TCP: for i in {1..254}; do nc -nvzw1 172.16.82.$i 20-23 80 2>&1 & done | grep -E 'succ|open'
+                UDP: for i in {1..254}; do nc -nuvzw1 172.16.82.$i 1000-2000 2>&1 & done | grep -E 'succ|open'
+            netcat vertical scanning
+                TCP: nc -nzvw1 172.16.82.106 21-23 80 2>&1 | grep -E 'succ|open'
+                UDP: nc -nuzvw1 172.16.82.106 1000-2000 2>&1 | grep -E 'succ|open'
+            netcat TCP scan script
+                #!/bin/bash
+                echo "Enter network address (e.g. 192.168.0): "
+                read net
+                echo "Enter starting host range (e.g. 1): "
+                read start
+                echo "Enter ending host range (e.g. 254): "
+                read end
+                echo "Enter ports space-delimited (e.g. 21-23 80): "
+                read ports
+                for ((i=$start; $i<=$end; i++))
+                do
+                    nc -nvzw1 $net.$i $ports 2>&1 | grep -E 'succ|open'
+                done
+            netcat banner grabbing
+                nc <ip> <port> #-u flag for UDP
+    Internal
+        Passive - non-interactive inside the network
+        Active - interactive inside the network
+
+Recon steps
+    Network footprinting
+        - Collect information relating to target - Network, systems, organization, IP ranges
+    Network scanning
+        - Port network vulnerability scanning
+    Network enumeration
+        - resources/shares, users and groups, routing tables, auditing and service settings, machine names, applications and banners, SNMP and DNS, other common services/ports
+    Vulnerability Assessment
+        - ID Vulnerabilities of the items enumerated
+        - Injection, broken auth, sensitive data exposure, XML external entities, broken access controls, security misconfig, Software/components with Known vulns
+    
+network number is 6
+student number is 6
+
+when first loging into the box
+ip a
+ss -antlp
+/usr/share/cctc
+./netcatTCP.sh
+banner grabbing
+wget -r
