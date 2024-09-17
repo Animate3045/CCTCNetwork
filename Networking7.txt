@@ -1,0 +1,14 @@
+Connect with Daniel Ragsdale on linkedin
+
+ssh user@remote -D 9050 #-D is for dynamic port forwarding.
+    must use port 9050, which is the default port for proxychains
+    optional -NT - no terminal (can make it cleaner)
+
+proxychains (only tcp traffic - ip a won't work)
+actions done from the blue host
+
+ssh user@remote -L 1111:<furtherRemote>:22 #-L is for localhost
+    we are telling our local host 1111 to send directly to the far 
+    remote port 22 - jack in our example in class. john is our 
+    server in this case
+

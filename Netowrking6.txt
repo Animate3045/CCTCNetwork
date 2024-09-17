@@ -1,0 +1,10 @@
+$ scp student@172.16.82.106:secretstuff.txt /home/student/secretstuff.txt
+Use comma separated curly braces to delimit multiple
+Use the -3 switch to send to multiple machines
+mknod mypipe p 
+vs mkfifo
+mypipe can hold data
+
+T1=My host
+T2=Blue_Host4 172.16.82.115
+RELAY = BLUE_INT_DMZ-HOST-1 172.16.40.10
