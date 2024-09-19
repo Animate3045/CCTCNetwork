@@ -1,0 +1,79 @@
+Sniffing tools and methods
+    Sensors
+        In line 
+            test access point (TAP) - gigamon tap 
+                Appliance placed between 2 devices
+                best for packet collection, no data loss
+                must be placed in-line of network traffic
+                not scalable
+                will need several installed to capture traffic for other network segements 
+            Man-in-the-middle (MitM)
+                Attacker can use ARP or some other method/protocol
+            - Placed between communicating devices to stop attacks - IPS/Firewall
+            - negatively impacts network latency
+        Out of band (passive)
+            Switched port Analyzer
+            - Monitors network segements
+            - can detect attacks but not stop
+            - Gets copies of network traffic - Intrusion detection system (IDS)
+            - no impact to latency
+
+Fingerprinting and host identification
+    Fingerprinting
+        active OS fingerprinting 
+        passive OS fingerprinting
+    Open Ports and Protocols
+        Windows - 88 (kerberos) 137/138/139 (netBIOS) 445 (SMB)
+        Linux - 22 (ssh) 111 (sun rpc)
+        Ephemeral Ports 
+    Protocol Specific Identifiers
+        Http - user agent strings
+        SSH - initial connection
+        NetBIOS Name Service
+    p0f - passive OS fingerprinting
+        Looks at variations in initial TTL, fragmentation flag, default IP header packet length, window size, and TCP options
+        configuration stored in /etc/p0f/p0f.fp
+
+Perform Network Traffic Baselining
+- Snapshot of what the network looks like during a time frame 
+- no industry standard
+- 7 days to establish the initial snapshot 
+- Prerequisitie information
+    Objective
+    - Determines current state
+    - Acertain the current utiliation of network resources
+    - Identify normal vs peak network traffic times
+    - verify port/protocol usage
+        Perform Baselining
+            Prep - net diagram, known servers/hosts/devices, known ips/ports/protocols (and forbidden), known traffic flows
+            Scope and Objectives - traffic/protocol to capture, which segements, which days, what times
+        
+        Determine Traffic Flow Through Protocol communication analysis
+        Using wireshark - common display filters, protocol hierarchy, coversations, endpoints, I/O graph
+
+        Perform Network Forensics
+
+            Methodologies
+                Hacker Methodologies
+                    footprinting
+                    network scanning
+                    Network enumeration
+                    Vulnerability Assessment
+                Cyber Kill Chain
+                    Recon
+                    Weaponization
+                    Delivery
+                    Exploitation
+                    Installation
+                    C2
+                    Actions on Objective
+                MITRE ATT&CK Framework
+                MITRE D3FEND
+                Diamond Model 
+                NIST cyber security framework 
+        
+        Indicators
+            Anomaly Detection 
+                indicator of attack (IOA)
+                proactive
+                a series ofactions that are suspicios together
