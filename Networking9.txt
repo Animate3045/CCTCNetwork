@@ -1,0 +1,48 @@
+Practical Applications for Filtering
+    Network traffic - allow/block traffic to/from remote locations
+    Email addresses - block unwanted email to reduce risk/increase productivity
+    Computer applications - increase security against vulnerable software
+    MAC filering - also for security only allow specific devices on a network
+
+Network traffic filtering concepts
+    Protocol operations
+    Header analysis
+    Network reconnaissance
+    Tunnel analysis
+    IOA and IOC 
+    Malware Analysis 
+
+sudo iptables -L # by default, lists out the filter table 
+sudo iptables -A INPUT -p tcp --deport 22 -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -j ACCEPT ## both need to happen for incoming ssh
+
+sudo iptables -A INPUT -p tcp --sport 22 -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT ## both needed for outgoing ssh
+
+sudo iptables -A INPUT -p tcp -m multiport --ports 6010,6011,6012 -j ACCEPT 
+sudo iptables -A OUTPUT -p tcp -m multiport --ports 6010,6011,6012 -j ACCEPT ## X11 forwarding
+
+sudo iptables -P INPUT DROP
+sudo iptables -P OUTPUT DROP
+sudo iptables -P FORWARD DROP ##make sure you put the rules in before the drop policy, otherwise you're hung
+
+##block to blue host 3
+sudo iptables -I INPUT -s 172.16.82.112 -j DROP
+sudo iptable -I OUTPUT -d 172.16.82.112 -j DROP
+
+##allow traffic from DMZ
+sudo iptables -A INPUT -s 172.16.40.10 -j ACCEPT
+sudo iptables -A OUTPUT -d 172.16.40.10 -j ACCEPT
+
+sudo nft add rule ip CCTC INPUT tcp sport {21-23, 80} accept
+sudo nft add rule ip CCTC OUTPUT tcp dport {21-23, 80} accept
+
+iptables -t mangle -A POSTROUTING -o eth0 -j TTL --ttl-set 128
+iptables -t mangle -A POSTROUTING -o eth0 -j DSCP --set-dscp 26
+
+MANGLE on NFTABLES
+nft add table ip MANGLE
+nft add chain ip MANGLE INPUT {type filter hook input priority 0 \; policy accept \;}
+nft add chain ip MANGLE OUTPUT {type filter hook output priority 0 \; policy accept \;}
+nft add rule ip MANGLE OUTPUT oif eth0 ip ttl set 128
+nft add rule ip MANGLE OUTPUT oif eth0 ip dscp set 26
