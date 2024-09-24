@@ -1,0 +1,27 @@
+which snort
+snort -V #for version
+sudo snort -D -l /var/log/snort -c /etc/snort/snort.conf 
+cd /var/log/snort
+ls 
+cat alert
+
+cd /home/activtiy_resources/pcaps
+
+snort -r <fileName> # will read from a saved pcap file 
+
+New jump box
+give us scan scripts and stuff
+new CTF for the exam
+we'll get a creds server - it will auto generate a hash that will be our password
+log on to provided box
+ip -br a 
+scan 
+
+There will be 3 boxes - host name will share the track
+
+to answer questions, you have to find the salt on the box 
+
+echo "<Answer><SPACE><SALT>" | md5sum
+
+medium track 
+echo "<startingPassword> <hint>" | md5sum
